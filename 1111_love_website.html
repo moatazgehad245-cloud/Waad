@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#210d1c">
+<title>11:11</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap');
+:root{--wine:#5b142f;--wine2:#2b0c20;--ink:#120d1b;--rose:#c58a9e;--paper:#f6ead8}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;overflow:hidden;color:#fff;font-family:'Cairo',sans-serif;background:radial-gradient(ellipse at 50% 42%,#54203b 0%,#2b1025 43%,#100d1b 100%)}
+body:before{content:"";position:fixed;inset:-30%;pointer-events:none;background:repeating-radial-gradient(ellipse at center,transparent 0 65px,rgba(255,220,230,.025) 66px 67px);animation:drift 30s linear infinite}
+@keyframes drift{to{transform:rotate(360deg)}}
+#stars{position:fixed;inset:0;pointer-events:none}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#f8dce6;box-shadow:0 0 10px #f8dce6;animation:twinkle 3s infinite ease-in-out}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.5)}}
+.screen{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:24px}
+.panel{text-align:center;width:min(100%,480px);perspective:1000px}
+.brand{font-size:clamp(2.7rem,12vw,5rem);font-weight:500;letter-spacing:7px;color:#f1d9df;text-shadow:0 8px 35px #d45c82;direction:ltr;margin:0 0 6px}
+.sub{color:#c9a6b5;font-size:.88rem;letter-spacing:2px;margin:0 0 35px}
+.lock-wrap{width:180px;height:190px;margin:0 auto 26px;position:relative;filter:drop-shadow(0 22px 30px #09050c)}
+.shackle{position:absolute;width:90px;height:90px;border:12px solid #c99aa9;border-bottom:0;border-radius:55px 55px 0 0;left:45px;top:0;transform:rotateY(-18deg);transform-origin:bottom;transition:.7s}
+.lock-body{position:absolute;left:22px;top:72px;width:136px;height:108px;border-radius:22px;background:linear-gradient(135deg,#8a3150,#4a142f 55%,#250e21);border:1px solid #d69bab;box-shadow:inset 7px 7px 15px #ffffff20,inset -10px -12px 20px #09050c80;display:grid;place-items:center}
+.keyhole{width:19px;height:19px;border-radius:50%;background:#e9c4ce;position:relative;box-shadow:0 0 18px #e9c4ce88}
+.keyhole:after{content:"";position:absolute;width:10px;height:27px;left:4.5px;top:12px;background:#e9c4ce;clip-path:polygon(20% 0,80% 0,100% 100%,0 100%)}
+.open .shackle{transform:translate(22px,-16px) rotate(24deg)}
+input{width:min(100%,260px);height:54px;border:1px solid #8b526b;border-radius:14px;background:#160d1dcc;color:#fff;text-align:center;font:600 1.15rem 'Cairo';letter-spacing:9px;outline:none;transition:.25s}
+input:focus{border-color:#e4a8bc;box-shadow:0 0 0 4px #d67c9b20}
+input::placeholder{letter-spacing:2px;color:#987487;font-size:.85rem}
+button{border:0;cursor:pointer;font-family:'Cairo';font-weight:700}
+.enter{display:block;margin:14px auto 0;padding:12px 42px;border-radius:13px;color:#250d1c;background:linear-gradient(135deg,#f0cbd5,#bd718b);box-shadow:0 8px 24px #07040b66;transition:.2s}
+.enter:hover{transform:translateY(-3px);box-shadow:0 12px 30px #d16d9260}
+.error{height:25px;color:#f0a2b4;font-size:.83rem;margin-top:9px}
+.hidden{display:none!important}
+#letterScene{position:fixed;inset:0;z-index:3;overflow:hidden;display:none}
+#letterScene.active{display:block}
+.hint{position:absolute;top:8vh;left:0;right:0;text-align:center;color:#e8cbd4;font-size:.95rem;text-shadow:0 2px 15px #000;pointer-events:none}
+.paper{position:absolute;width:min(310px,78vw);min-height:220px;left:50%;top:50%;transform:translate(-50%,-50%) rotateX(8deg) rotateY(-10deg);background:linear-gradient(145deg,#fff6e8,#e8d5b9);color:#553348;padding:27px 24px 22px;border-radius:3px 3px 12px 3px;box-shadow:18px 24px 55px #05030c99,inset 0 0 25px #b9947130;cursor:pointer;transform-style:preserve-3d;transition:left .65s cubic-bezier(.2,.8,.2,1),top .65s cubic-bezier(.2,.8,.2,1),transform .65s;animation:float 3.8s ease-in-out infinite}
+.paper:before{content:"";position:absolute;inset:10px;border:1px solid #b99b83;pointer-events:none}
+.paper:after{content:"";position:absolute;right:0;bottom:0;border-width:0 0 24px 24px;border-style:solid;border-color:transparent transparent #cbb294 transparent;filter:drop-shadow(-2px -2px 2px #a88b70)}
+@keyframes float{0%,100%{margin-top:0}50%{margin-top:-15px}}
+.paper-top{font-family:'Amiri',serif;text-align:center;font-size:1.15rem;color:#8d5268;margin-bottom:13px}
+.paper-line{height:1px;background:#c7aa91;margin:0 auto 15px;width:72%}
+.paper-text{font-family:'Amiri',serif;text-align:center;font-size:1.35rem;line-height:1.9}
+.paper-hint{text-align:center;font-size:.72rem;color:#997d70;margin-top:15px}
+#message{position:fixed;z-index:5;inset:0;display:none;place-items:center;padding:22px;background:#100b18d9;backdrop-filter:blur(12px)}
+#message.show{display:grid;animation:fade .8s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.message-card{position:relative;width:min(100%,520px);padding:38px 28px 34px;text-align:center;border:1px solid #8e536b;border-radius:22px;background:linear-gradient(145deg,#351326,#1a1020 75%);box-shadow:0 25px 90px #05030acc, inset 0 1px #ffffff18;transform:rotateX(5deg);animation:rise 1s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{transform:translateY(35px) rotateX(15deg);opacity:0}to{transform:translateY(0) rotateX(5deg);opacity:1}}
+.heart{font-size:2rem;color:#e7a7b8;text-shadow:0 0 22px #df6b91;margin-bottom:8px}
+.message-card h2{font-family:'Amiri',serif;font-size:2rem;font-weight:700;color:#f2dce3;margin:0 0 15px}
+.message-card p{font-family:'Amiri',serif;color:#ead5dd;font-size:1.28rem;line-height:2;margin:0}
+.signature{margin-top:22px;color:#c68da2;font-size:.8rem;letter-spacing:2px}
+@media(max-height:650px){.lock-wrap{transform:scale(.8);margin-bottom:8px}.sub{margin-bottom:10px}.brand{font-size:3rem}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<main class="screen" id="gate">
+  <section class="panel">
+    <h1 class="brand">11:11</h1>
+    <p class="sub">A LITTLE WISH, JUST FOR YOU</p>
+    <div class="lock-wrap" id="lock">
+      <div class="shackle"></div><div class="lock-body"><div class="keyhole"></div></div>
+    </div>
+    <input id="password" type="password" inputmode="numeric" maxlength="6" placeholder="كلمة السر" aria-label="كلمة السر">
+    <button class="enter" id="unlock">افتحي القفل</button>
+    <div class="error" id="error"></div>
+  </section>
+</main>
+<section id="letterScene" aria-label="الجواب">
+  <div class="hint">في جواب صغير مستنيكي… حاولي تلمسيه ✨</div>
+  <article class="paper" id="paper">
+    <div class="paper-top">إلى صاحبة الأمنيات الجميلة</div>
+    <div class="paper-line"></div>
+    <div class="paper-text">هناك رسالة صغيرة<br>تستحق أن تصلكِ…</div>
+    <div class="paper-hint">اضغطي على الورقة لفتحها</div>
+  </article>
+</section>
+<section id="message">
+  <div class="message-card">
+    <div class="heart">♥</div>
+    <h2>دعوة من القلب</h2>
+    <p>
+      ربنا يكتبلك الخير في كل خطوة،<br>
+      ويوفقك ويكرمك فوق ما تتمني،<br>
+      ويفتحلك كل باب نفسك فيه،<br>
+      ويجعل تعبك دايمًا نهايته فرحة ونجاح.<br>
+      ربنا يطمن قلبك، وينوّر طريقك،<br>
+      ويرزقك أيام حلوة على قد جمال قلبك.<br>
+      وتفضلي دايمًا ناجحة ومبسوطة…<br>
+      وربنا يجعل اللي جاي أجمل مما تتخيلي. 🤍
+    </p>
+    <div class="signature">11:11 — EVERY WISH DESERVES A CHANCE</div>
+  </div>
+</section>
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<75;i++){const s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*4+'s';s.style.opacity=Math.random();stars.appendChild(s)}
+const password=document.getElementById('password'),error=document.getElementById('error'),lock=document.getElementById('lock');
+function unlock(){if(password.value==='222008'){lock.classList.add('open');error.textContent='';setTimeout(()=>{document.getElementById('gate').classList.add('hidden');document.getElementById('letterScene').classList.add('active')},650)}else{error.textContent='مش ده المفتاح… جربي تاني';password.value='';password.focus()}}
+document.getElementById('unlock').addEventListener('click',unlock);
+password.addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+const paper=document.getElementById('paper');let touches=0;
+paper.addEventListener('click',()=>{
+  touches++;
+  if(touches<3){
+    const margin=22,w=paper.offsetWidth,h=paper.offsetHeight;
+    const x=margin+Math.random()*(innerWidth-w-2*margin),y=margin+Math.random()*(innerHeight-h-2*margin);
+    paper.style.left=x+w/2+'px';paper.style.top=y+h/2+'px';
+    paper.style.transform=`translate(-50%,-50%) rotateX(${Math.random()*24-12}deg) rotateY(${Math.random()*30-15}deg) rotateZ(${Math.random()*14-7}deg)`;
+  }else{
+    paper.style.left='50%';paper.style.top='50%';paper.style.transform='translate(-50%,-50%) rotateX(0) rotateY(0) scale(1.06)';
+    paper.style.cursor='default';paper.style.animation='none';
+    setTimeout(()=>document.getElementById('message').classList.add('show'),650);
+  }
+});
+</script>
+</body>
+</html>
